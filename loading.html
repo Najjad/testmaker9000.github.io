@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Center the loader */
+#loader-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#loader {
+  width: 120px;
+  height: 120px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#loading-text {
+  font-size: 18px;
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  animation-name: animatebottom;
+  animation-duration: 1s;
+}
+
+@keyframes animatebottom {
+  from { bottom:-100px; opacity:0; }
+  to { bottom:0px; opacity:1; }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+</head>
+<body onload="myFunction()" style="margin:0;">
+
+<div id="loader-container">
+  <div id="loader"></div>
+  <p id="loading-text">BIG GAY CONNECTING BALLS<span id="loading-dots"></span></p>
+</div>
+<div style="display:none;" id="myDiv" class="animate-bottom">
+    <p>fart</p>
+</div>
+
+<script>
+var myVar;
+var dots = "";
+var dotCount = 0;
+var dotInterval;
+
+function myFunction() {
+  // Start adding dots every second
+  dotInterval = setInterval(addDot, 750);
+  myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  clearInterval(dotInterval); // Stop adding dots
+  document.getElementById("loader-container").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+  
+  window.location.href = "mainpage.php";
+}
+
+function addDot() {
+  // Limit the number of dots
+  if (dotCount <= 4) {
+    dots += ".";
+    document.getElementById("loading-dots").innerText = dots;
+    dotCount++;
+  } else {
+    dots = ""; // Reset dots after 3 dots
+    document.getElementById("loading-dots").innerText = dots;
+    dotCount = 0;
+  }
+}
+</script>
+
+</body>
+</html>
